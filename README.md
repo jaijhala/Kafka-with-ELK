@@ -22,16 +22,20 @@ output.kafka:
 compression: none
 
 This will send events to Kafka port 9092 on topic test. 
-Start Filebeat depending on the package/OS you have, more details -> https://www.elastic.co/guide/en/beats/filebeat/current/directory-layout.html
+Start Filebeat depending on the package/OS you have, 
+more details -> https://www.elastic.co/guide/en/beats/filebeat/current/directory-layout.html
+
 https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-command-line.html
 
-2). Kafka -> Start the Kafka server and zookeeper using below commands:(https://kafka.apache.org/0100/documentation.html)
+2). Kafka -> Start the Kafka server and zookeeper using below commands:
+(https://kafka.apache.org/0100/documentation.html)
 
 bin/kafka-server-start.sh config/server.properties
 
 bin/zookeeper-server-start.sh config/zookeeper.properties
 
 Create a topic called test ->
+
 bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
 
 Filebeat will act as a producer. Start a console consumer as a test to see if you are able to consume those events: 
@@ -43,10 +47,13 @@ At this point, you should be able to see lots of events in the console consumer.
 Create logstash.conf file and add below lines :
 
 input {
-  kafka {
-        topics => "test"
+ 
+ kafka {
+ 
+ topics => "test"
         }
 }
+
 output {
         stdout { codec => rubydebug }
 }
