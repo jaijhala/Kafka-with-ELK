@@ -41,16 +41,17 @@ https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-command-line.htm
 
 (https://kafka.apache.org/0100/documentation.html)
 
-bin/kafka-server-start.sh config/server.properties
+    bin/kafka-server-start.sh config/server.properties
 
-bin/zookeeper-server-start.sh config/zookeeper.properties
+    bin/zookeeper-server-start.sh config/zookeeper.properties
 
 Create a topic called test ->
 
-bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+    bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
 
 Filebeat will act as a producer. Start a console consumer as a test to see if you are able to consume those events: 
-bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
+
+    bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
 
 At this point, you should be able to see lots of events in the console consumer. This test confirms that the setup is working fine so far. 
 
