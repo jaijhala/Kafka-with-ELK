@@ -21,15 +21,15 @@ All of these were installed on the same machine localhost.
 
 Add following lines in the output section of filebeat.yml file :
 
-output.kafka:
+    output.kafka:
 
-enabled: true
+     enabled: true
  
- hosts: ["localhost:9092"]
+     hosts: ["localhost:9092"]
  
- topic: test
+     topic: test
 
-compression: none
+     compression: none
 
 This will send events to Kafka port 9092 on topic test. 
 Start Filebeat depending on the package/OS you have, 
