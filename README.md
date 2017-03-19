@@ -16,9 +16,13 @@ All of these were installed on the same machine localhost.
 Add following lines in the output section of filebeat.yml file :
 
 output.kafka:
- enabled: true
+
+enabled: true
+ 
  hosts: ["localhost:9092"]
+ 
  topic: test
+
 compression: none
 
 This will send events to Kafka port 9092 on topic test. 
@@ -28,6 +32,7 @@ more details -> https://www.elastic.co/guide/en/beats/filebeat/current/directory
 https://www.elastic.co/guide/en/beats/filebeat/current/filebeat-command-line.html
 
 2). Kafka -> Start the Kafka server and zookeeper using below commands:
+
 (https://kafka.apache.org/0100/documentation.html)
 
 bin/kafka-server-start.sh config/server.properties
@@ -51,10 +56,12 @@ input {
  kafka {
  
  topics => "test"
+        
         }
 }
 
 output {
+        
         stdout { codec => rubydebug }
 }
 
