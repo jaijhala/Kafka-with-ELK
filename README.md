@@ -4,15 +4,21 @@ The objective of this repo is to learn how to integrate Kafka with the ELK Stack
 Below is the event flow we'll be implementing: Log files -> FileBeat -> Kafka -> Logstash -> Elasticsearch -> Kibana
 
 Versions:
+
 FileBeat 5.2.2
+
 Kafka 0.10.0.1
+
 Logstash 5.2.2
+
 Elasticsearch 5.2.2
+
 Kibana 5.2.2
 
 All of these were installed on the same machine localhost. 
 
 1). Filebeat -> We will be gathering the default logs - /var/log/*.log specified in filebeat.yml
+
 Add following lines in the output section of filebeat.yml file :
 
 output.kafka:
@@ -51,19 +57,19 @@ At this point, you should be able to see lots of events in the console consumer.
 3). Logstash -> We will use Kafka input plugin in this case. 
 Create logstash.conf file and add below lines :
 
-input {
+    input {
  
- kafka {
+            kafka {
  
- topics => "test"
+                    topics => "test"
         
-        }
-}
+                  }
+           }
 
-output {
+     output {
         
-        stdout { codec => rubydebug }
-}
+              stdout { codec => rubydebug }
+            }
 
 Start Logstash specifying the above logstash.conf file. 
 This will start consuming events from test topic. You should see lots of log files in the Logstash command line. Again the idea here is to make sure that Logstash is receiving and sending out those events as expected. 
@@ -71,10 +77,11 @@ This will start consuming events from test topic. You should see lots of log fil
 4). Now start setting up Logstash to send to Elasticsearch
 
 Add following lines in the logstash.conf output part -> 
-elasticsearch {
-                hosts => "localhost:9200"
-                index => "filebeat"
-                      }
+
+    elasticsearch {
+                   hosts => "localhost:9200"
+                   index => "filebeat"
+                   }
 
 This will send events to elasticsearch on the localhost and create the index filebeat. 
 
